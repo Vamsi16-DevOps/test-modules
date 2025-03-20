@@ -1,0 +1,15 @@
+
+  name: Hello Vamsi
+  on:
+    workflow_dispatch:
+      inputs:
+        name:
+          description: 'Name'
+          type: string
+          default: 'test'
+  jobs:
+    manual:
+      runs-on: self-hosted
+      steps:
+        - name: Greetings
+          run: echo "manual testing"
