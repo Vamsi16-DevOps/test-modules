@@ -1,0 +1,31 @@
+
+name: steps-output
+on: 
+  push:
+    branches: [main]
+
+jobs:
+  jobs1:
+    runs-on: self-hosted
+    steps:
+      - name: set output
+        id: set-output
+        shell: bash
+        run: |
+          echo "name=vamsi" >> $GITHUB_OUTPUT
+          echo "age=26" >> $GITHUB_OUTPUT
+       
+      - name: set output
+        id: set-output2
+        shell: bash
+        run: |
+          echo "salary=10000" >> $GITHUB_OUTPUT   
+        
+      - name: access output
+        run: |
+         echo "the value of output name is ${{ steps.set-output.outputs.name }}"
+         echo "the value of output age is ${{ steps.set-output.outputs.age }}"
+        
+      - name: access output2
+        run: |
+         echo "the value of output salary is ${{ steps.set-output2.outputs.salary }}"
