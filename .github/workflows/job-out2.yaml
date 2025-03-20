@@ -1,0 +1,28 @@
+name: job output
+on:
+  push:
+    branches: [main]
+jobs:
+  job1:
+    runs-on: self-hosted
+    outputs: 
+      job1_charan: ${{steps.set-out.outputs.name}}
+    steps:
+      - name: set-output
+        id: set-out
+        run: echo "name=vamsi" >> $GITHUB_OUTPUT
+      - name: access ouput
+        run: echo "value of name is ${{steps.set-out.outputs.name}}"
+        
+  # job2:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: access output        {without needs it will fail job2 will trigger before job1}
+  #       run: echo "values of name is ${{steps.set-out.outputs.name}}"
+  job2:
+    runs-on: self-hosted
+    needs: job1
+    steps:
+      - name: access output
+        run: echo "values of output name from job1 is ${{needs.job1.outputs.job1_charan}}"
+        
