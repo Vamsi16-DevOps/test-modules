@@ -1,0 +1,36 @@
+name: Download Artifacts Example
+
+on:
+  workflow_dispatch:  # Allows you to trigger the workflow manually
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create a build artifact
+        run: |
+          mkdir -p output
+          echo "This is a build artifact" > output/artifact.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: output/
+
+  deploy:
+    runs-on: self-hosted
+    needs: build  # This ensures the build job completes before this job starts
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: my-artifact  # The name of the artifact to download
+          path: download/  # Directory to download the artifact to
+
+      - name: Display the artifact content
+        run: cat download/output/artifact.txt
