@@ -1,0 +1,23 @@
+name: job output
+on:
+  push:
+    branches: [main]
+  
+jobs:
+  job1:
+    runs-on: self-hosted
+    steps:
+      - name: set output
+        id: set-output
+        run: echo "name=vamsi" >> $GITHUB_OUTPUT
+    
+      - name: access output
+        run: echo "the value of name is ${{steps.set-output.outputs.name}}"
+
+  job2:
+    runs-on: self-hosted
+    steps:
+      - name: access output
+        run: echo "the value of name is ${{steps.set-output.outputs.name}}"
+      
+      
