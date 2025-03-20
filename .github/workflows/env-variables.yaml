@@ -1,0 +1,80 @@
+
+# name: hello vamsi  ( without using env-variables)
+
+# on:
+#   push:
+#     branches: [main]
+
+# jobs:
+#   demo:
+#     runs-on: self-hosted 
+
+#     steps:
+#       - name: greetings
+#         run: |
+#           echo "vamsi-hi,how are you, what are you doing, whats lunch today, shall we meet"
+# #           echo "charan-hi,how are you, what are you doing, whats lunch today, shall we meet"
+
+# name: env varibales  ( env_variables using workflow level )
+# on:
+#   push:
+#     branches: [main]
+# env: 
+#   GREETINGS: hi,how are you, what are you doing, whats lunch today, shall we meet
+# jobs:
+#   job1:
+#     runs-on: self-hosted
+#     steps:
+#       - name: wishes
+#         run: |
+#           echo " vamsi- ${{env.GREETINGS}}"
+#           echo " charan- ${{env.GREETINGS}}"
+#       - name: get comments on ${{env.GREETINGS}}  
+#         run: |
+#           echo "awesome"
+#           echo "nothing"
+#           echo "biryani"
+#           echo "okay"
+  
+#   job2:
+#     runs-on: self-hosted
+#     steps:
+#       - name: wishes
+#         run: |
+#           echo " ammu- ${{env.GREETINGS}}"
+#           echo " lucky- ${{env.GREETINGS}}"        
+          
+
+      
+  
+
+
+name: env varibales
+on:
+  push:
+    branches: [main]
+jobs:
+  job1:
+    runs-on: self-hosted
+    env: 
+     GREETINGS: hi,how are you, what are you doing, whats lunch today, shall we meet
+    steps:
+      - name: wishes
+        run: |
+          echo " vamsi- ${{env.GREETINGS}}"
+          echo " charan- ${{env.GREETINGS}}"
+      - name: get comments on ${{env.GREETINGS}}  
+        run: |
+          echo "awesome"
+          echo "nothing"
+          echo "biryani"
+          echo "okay"
+  
+  job2:
+    runs-on: self-hosted
+    steps:
+      - name: wishes
+        run: |
+          echo " ammu- ${{env.GREETINGS}}"
+          echo " lucky- ${{env.GREETINGS}}"        
+          
