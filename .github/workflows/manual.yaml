@@ -1,0 +1,45 @@
+
+
+
+
+  name: Testing_options
+  on:
+    workflow_dispatch:
+      inputs:
+        name:
+          description: 'Name'
+          type: string
+          default: 'test'
+          
+        age:
+          description: 'Age'
+          type: number
+          required: True
+          
+        gender:
+          description: 'Gender'
+          type: choice
+          options:
+            - male
+            - female
+
+        married:
+          description:  'is married?'
+          type: boolean
+          
+
+  jobs:
+    manual:
+      runs-on: self-hosted
+      steps:
+        - name: Greetings
+          run: echo "${{ inputs.name }}"
+
+        - name: Age
+          run: echo "${{ inputs.age }}"
+
+        - name: Gender
+          run: echo "${{ inputs.gender }}"
+
+        - name: Married
+          run: echo "${{ inputs.married }}"
